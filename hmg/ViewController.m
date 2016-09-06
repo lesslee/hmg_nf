@@ -121,7 +121,7 @@ NSString *empno;
 {
     
     
-    
+    NSString *str=@"test";
     
 }
 
