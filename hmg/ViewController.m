@@ -57,7 +57,7 @@ NSString *empno;
         NSLog(@"新版本%@",newVersion);
         NSDictionary *infoDict = [[NSBundle mainBundle] infoDictionary];
         NSString *myVersion = [infoDict objectForKey:@"CFBundleShortVersionString"];
-        NSLog(@"本地版本%@",myVersion);
+        NSLog(@"本地－－－－版本%@",myVersion);
         
         if (![newVersion isEqualToString:myVersion]) {
             UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"有新版本" delegate:self cancelButtonTitle:@"立即更新" otherButtonTitles:@"暂不更新", nil];
