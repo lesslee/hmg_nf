@@ -302,7 +302,7 @@ UITableView *tableView;
 
 -(void) finishSingleRequestFailed:(NSError *)error userInfo:(NSDictionary *)dic
 {
-    [HUDManager showErrorWithMessage:@"网络错误" duration:1];
+    //[HUDManager showErrorWithMessage:@"网络错误" duration:1];
     //NSLog(@"---------------------------------");
     //NSLog(@"%@",error.localizedFailureReason);
     
@@ -554,6 +554,9 @@ UITableView *tableView;
             user.PERNR=@"0";
             user.ENAME=@"人员";
             self.users = [NSMutableArray arrayWithObjects:user, nil];
+            
+            self.selectDept=tempDept;
+            
         }
     }
     if (indexPath.column==2) {
@@ -569,8 +572,7 @@ UITableView *tableView;
 //    if (indexPath.row!=0) {
 //            //[HUDManager showMessage:@"加载中..."];
 //        [self.refreshControll startPullDownRefreshing];
-//        [self.reports removeAllObjects];
-//        [tableView reloadData];
+//        
 //    }
 
 }
@@ -602,8 +604,8 @@ UITableView *tableView;
     if (!cell)
     {
     if ([tempReport.TOTAL_RECORDS isEqualToString:@"0"]) {
-        [self.reports removeObjectAtIndex:0];
-        [self.reports removeObjectAtIndex:1];
+        //[self.reports removeObjectAtIndex:0];
+        //[self.reports removeObjectAtIndex:1];
         cell.userInteractionEnabled = NO;
     } else {
         
@@ -629,7 +631,9 @@ UITableView *tableView;
 //-------------------------------
 -(void) tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-   
+    if (indexPath!=nil) {
+        
+    
     ReportCell *tempCell=(ReportCell*)cell;
     
     ReportModel *reportModel=(ReportModel*)[self.reports objectAtIndex:indexPath.row];
@@ -652,6 +656,7 @@ UITableView *tableView;
     tempCell.ename.tag = indexPath.row ;
     [tempCell.company addTarget:self action:@selector(reportCoustomer:) forControlEvents:UIControlEventTouchUpInside];
     tempCell.company.tag = indexPath.row ;
+    }
 }
 //-(void) saveNSUserDefaults{
 //    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
@@ -846,7 +851,8 @@ UITableView *tableView;
         
         [self.serviceHelper startQueue];
         
-        
+        [self.reports removeAllObjects];
+        [tableView reloadData];
     }
 }
 - (void)endLoadMore {
