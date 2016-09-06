@@ -117,6 +117,10 @@ NSString *empno;
         // Dispose of any resources that can be recreated.
 }
 
+-(void) AA
+{
+}
+
 - (IBAction)loginHandle:(id)sender {
     
     if([@"" isEqualToString:self.loginId.text]||[@"" isEqualToString:self.password.text])
