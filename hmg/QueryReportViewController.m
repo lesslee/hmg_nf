@@ -113,7 +113,7 @@ UITableView *tableView;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-
+    
     HUDManager = [[MBProgressHUDManager alloc] initWithView:self.navigationController.view];
     self.serviceHelper=[[ServiceHelper alloc] initWithDelegate:self];
     
@@ -135,7 +135,7 @@ UITableView *tableView;
     area.DEPT_ID=@"0";
     area.DEPT_NM=@"大区";
     
-   
+    
     DeptModel *dept=[[DeptModel alloc] init];
     dept.DEPT_ID=@"0";
     dept.DEPT_NM=@"部门";
@@ -145,7 +145,7 @@ UITableView *tableView;
     user.ENAME=@"人员";
     
     self.areas = [NSMutableArray arrayWithObjects:area, nil];
-   
+    
     self.depts = [NSMutableArray arrayWithObjects:dept, nil];
     
     self.users = [NSMutableArray arrayWithObjects:user, nil];
@@ -159,21 +159,21 @@ UITableView *tableView;
     menu.dataSource = self;
     [self.view addSubview:menu];
     
-//    UIButton *button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-//    button.frame = CGRectMake(10, 110, self.view.frame.size.width - 20, 40);
-//    [button setUserInteractionEnabled:YES];
-//    button.layer.cornerRadius=5;
-//    button.layer.masksToBounds=YES;
-//    
-//    [button setBackgroundImage:[self createImageWithColor:[self colorWithHexString:@"#41b6ca" alpha:(1.0f)]] forState:UIControlStateNormal];
-//    
-//        //button.backgroundColor = [UIColor blueColor];
-//    [button setTitle:@"查  询" forState:UIControlStateNormal];
-//    [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-//    button.titleLabel.font = [UIFont systemFontOfSize:20];
-//    [button addTarget:self action:@selector(search1) forControlEvents:UIControlEventTouchUpInside];
-//    [self.view addSubview:button];
-
+    //    UIButton *button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    //    button.frame = CGRectMake(10, 110, self.view.frame.size.width - 20, 40);
+    //    [button setUserInteractionEnabled:YES];
+    //    button.layer.cornerRadius=5;
+    //    button.layer.masksToBounds=YES;
+    //
+    //    [button setBackgroundImage:[self createImageWithColor:[self colorWithHexString:@"#41b6ca" alpha:(1.0f)]] forState:UIControlStateNormal];
+    //
+    //        //button.backgroundColor = [UIColor blueColor];
+    //    [button setTitle:@"查  询" forState:UIControlStateNormal];
+    //    [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    //    button.titleLabel.font = [UIFont systemFontOfSize:20];
+    //    [button addTarget:self action:@selector(search1) forControlEvents:UIControlEventTouchUpInside];
+    //    [self.view addSubview:button];
+    
     
     NSTimeInterval secondsPerDay1 = 24*60*60*7;
     NSDate *now = [NSDate date];
@@ -185,51 +185,51 @@ UITableView *tableView;
     [self areaQuery];
     
     
-        //[HUDManager showMessage:@"加载中..."];
-        [self.refreshControll startPullDownRefreshing];
+    //[HUDManager showMessage:@"加载中..."];
+    [self.refreshControll startPullDownRefreshing];
     
 }
 
 
 -(UIColor *)colorWithHexString:(NSString *)color alpha:(CGFloat)alpha
 {
-        //删除字符串中的空格
+    //删除字符串中的空格
     NSString *cString = [[color stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] uppercaseString];
-        // String should be 6 or 8 characters
+    // String should be 6 or 8 characters
     if ([cString length] < 6)
-        {
+    {
         return [UIColor clearColor];
-        }
-        // strip 0X if it appears
-        //如果是0x开头的，那么截取字符串，字符串从索引为2的位置开始，一直到末尾
+    }
+    // strip 0X if it appears
+    //如果是0x开头的，那么截取字符串，字符串从索引为2的位置开始，一直到末尾
     if ([cString hasPrefix:@"0X"])
-        {
+    {
         cString = [cString substringFromIndex:2];
-        }
-        //如果是#开头的，那么截取字符串，字符串从索引为1的位置开始，一直到末尾
+    }
+    //如果是#开头的，那么截取字符串，字符串从索引为1的位置开始，一直到末尾
     if ([cString hasPrefix:@"#"])
-        {
+    {
         cString = [cString substringFromIndex:1];
-        }
+    }
     if ([cString length] != 6)
-        {
+    {
         return [UIColor clearColor];
-        }
+    }
     
-        // Separate into r, g, b substrings
+    // Separate into r, g, b substrings
     NSRange range;
     range.location = 0;
     range.length = 2;
-        //r
+    //r
     NSString *rString = [cString substringWithRange:range];
-        //g
+    //g
     range.location = 2;
     NSString *gString = [cString substringWithRange:range];
-        //b
+    //b
     range.location = 4;
     NSString *bString = [cString substringWithRange:range];
     
-        // Scan values
+    // Scan values
     unsigned int r, g, b;
     [[NSScanner scannerWithString:rString] scanHexInt:&r];
     [[NSScanner scannerWithString:gString] scanHexInt:&g];
@@ -255,7 +255,7 @@ UITableView *tableView;
 
 -(void)search1{
     
-        //[HUDManager showMessage:@"加载中..."];
+    //[HUDManager showMessage:@"加载中..."];
     [self.refreshControll startPullDownRefreshing];
     [self.reports removeAllObjects];
     [tableView reloadData];
@@ -266,7 +266,7 @@ UITableView *tableView;
 -(void) viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-   
+    
 }
 
 //加载大区
@@ -279,7 +279,7 @@ UITableView *tableView;
     [areaParam setIN_IS_FCU:appDelegate.userInfo.EMP_TYPE];
     
     NSLog(@"%@",areaParam.IN_IS_FCU);
-   
+    
     NSString *paramXml=[SoapHelper objToDefaultSoapMessage:areaParam];
     
     [self.serviceHelper resetQueue];
@@ -306,8 +306,8 @@ UITableView *tableView;
     //NSLog(@"---------------------------------");
     //NSLog(@"%@",error.localizedFailureReason);
     
-//    [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:1] animated:YES];
-
+    //    [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:1] animated:YES];
+    
     
 }
 
@@ -321,16 +321,16 @@ UITableView *tableView;
             if ([@"HMG_AREA_QUERY" isEqualToString:[dic objectForKey:@"name"]]) {
                 AppDelegate *del = [UIApplication sharedApplication].delegate;
                 AreaModel *tempArea=[[AreaModel alloc] init];
-                    [self.areas removeAllObjects];
+                [self.areas removeAllObjects];
                 [self.areas addObjectsFromArray:[tempArea searchNodeToArray:xml nodeName:@"NewDataSet"]];
                 if ([del.userInfo.EMP_TYPE isEqualToString:@"0"]) {
                     self.selectArea=(AreaModel*)[self.areas objectAtIndex:0];
                     NSLog(@"%@123",[self.areas[0]DEPT_NM]);
                 }else{
-              self.selectArea.DEPT_ID = @"";
-                
+                    self.selectArea.DEPT_ID = @"";
+                    
                 }
-            
+                
             }
             /**查询部门**/
             if ([@"HMG_DEPT_QUERY" isEqualToString:[dic objectForKey:@"name"]])
@@ -350,7 +350,7 @@ UITableView *tableView;
                 ReportModel *tempReport=[[ReportModel alloc] init];
                 if (isRefresh) {
                     
-
+                    
                     [self.reports removeAllObjects];
                     
                     [self.reports addObjectsFromArray:[tempReport searchNodeToArray:xml nodeName:@"NewDataSet"]];
@@ -361,10 +361,10 @@ UITableView *tableView;
                 }
                 else
                 {
-                
+                    
                     [self.reports addObjectsFromArray:[tempReport searchNodeToArray:xml nodeName:@"NewDataSet"]];
                     [self.refreshControll endPullUpLoading];
-                
+                    
                 }
                 
                 if (self.reports.count>0) {
@@ -372,11 +372,11 @@ UITableView *tableView;
                     Max_Count=[model0.TOTAL_RECORDS intValue];
                     NSLog(@"%@",model0.TOTAL_RECORDS);
                 }else{
-                
+                    
                     [self.reports removeAllObjects];
-                        //[tableView reloadData];
+                    //[tableView reloadData];
                 }
-            
+                
                 [tableView reloadData];
                 //[HUDManager hide];
             }
@@ -430,7 +430,7 @@ UITableView *tableView;
     if (indexPath.column == 0) {
         
         AreaModel *m1=(AreaModel *)self.areas[indexPath.row];
-
+        
         return m1.DEPT_NM;
         
         
@@ -443,7 +443,7 @@ UITableView *tableView;
         UserModel *m3=(UserModel *)self.users[indexPath.row];
         return m3.ENAME;
     }
-
+    
 }
 
 
@@ -524,7 +524,7 @@ UITableView *tableView;
             
             [self.serviceHelper resetQueue];
             
-           request1=[ServiceHelper commonSharedRequestMethod:@"HMG_USER_QUERY" soapMessage:paramXml];
+            request1=[ServiceHelper commonSharedRequestMethod:@"HMG_USER_QUERY" soapMessage:paramXml];
             [request1 setUserInfo:[NSDictionary dictionaryWithObjectsAndKeys:@"HMG_USER_QUERY",@"name", nil]];
             [self.serviceHelper addRequestQueue:request1];
             
@@ -569,12 +569,12 @@ UITableView *tableView;
     lastRow=indexPath.row;
     
     
-//    if (indexPath.row!=0) {
-//            //[HUDManager showMessage:@"加载中..."];
-//        [self.refreshControll startPullDownRefreshing];
-//        
-//    }
-
+    //    if (indexPath.row!=0) {
+    //            //[HUDManager showMessage:@"加载中..."];
+    //        [self.refreshControll startPullDownRefreshing];
+    //
+    //    }
+    
 }
 
 
@@ -597,24 +597,24 @@ UITableView *tableView;
 
 -(UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-   
+    
     ReportCell * cell = [tableView dequeueReusableCellWithIdentifier:@"ReportCell"];
-   ReportModel *tempReport=[[ReportModel alloc] init];
+    ReportModel *tempReport=[[ReportModel alloc] init];
     
     if (!cell)
     {
-    if ([tempReport.TOTAL_RECORDS isEqualToString:@"0"]) {
-        //[self.reports removeObjectAtIndex:0];
-        //[self.reports removeObjectAtIndex:1];
-        cell.userInteractionEnabled = NO;
-    } else {
-        
-        [tableView registerNib:[UINib nibWithNibName:@"ReportCell" bundle:nil] forCellReuseIdentifier:@"ReportCell"];
-        cell = [tableView dequeueReusableCellWithIdentifier:@"ReportCell"];
-    }
+        if ([tempReport.TOTAL_RECORDS isEqualToString:@"0"]) {
+            //[self.reports removeObjectAtIndex:0];
+            //[self.reports removeObjectAtIndex:1];
+            cell.userInteractionEnabled = NO;
+        } else {
+            
+            [tableView registerNib:[UINib nibWithNibName:@"ReportCell" bundle:nil] forCellReuseIdentifier:@"ReportCell"];
+            cell = [tableView dequeueReusableCellWithIdentifier:@"ReportCell"];
+        }
     }
     
- 
+    
     if (indexPath.row%2==0) {
         cell.backgroundColor=[UIColor whiteColor];
     }
@@ -623,7 +623,7 @@ UITableView *tableView;
         cell.backgroundColor=[UIColor colorWithWhite:0.95 alpha:1.0];
     }
     
-        cell.layer.masksToBounds=YES;
+    cell.layer.masksToBounds=YES;
     
     return cell;
 }
@@ -633,29 +633,29 @@ UITableView *tableView;
 {
     if (indexPath!=nil) {
         
-    
-    ReportCell *tempCell=(ReportCell*)cell;
-    
-    ReportModel *reportModel=(ReportModel*)[self.reports objectAtIndex:indexPath.row];
-    if ([reportModel.STORE_NM isEqualToString:@"无"]) {
-       
-       [tempCell.company setTitle: reportModel.AGENT_NM forState:UIControlStateNormal];
-    }else
-    {
-        [tempCell.company setTitle:reportModel.STORE_NM forState:UIControlStateNormal];
-    }
-//    inpdtm =  reportModel.INP_DTM;
-//    tempCell.date.text = inpdtm;
-    tempCell.date.text = reportModel.INP_DTM;
-    tempCell.rmk.text=reportModel.RMK;
-    tempCell.product.text=reportModel.PRODUCT_NM;
-    tempCell.purpose.text=reportModel.VISIT_PURPOSE;
-    [tempCell.ename setTitle:reportModel.EMP_NM forState:UIControlStateNormal];
-    
-    [tempCell.ename addTarget:self action:@selector(reportUser:) forControlEvents:UIControlEventTouchUpInside];
-    tempCell.ename.tag = indexPath.row ;
-    [tempCell.company addTarget:self action:@selector(reportCoustomer:) forControlEvents:UIControlEventTouchUpInside];
-    tempCell.company.tag = indexPath.row ;
+        
+        ReportCell *tempCell=(ReportCell*)cell;
+        
+        ReportModel *reportModel=(ReportModel*)[self.reports objectAtIndex:indexPath.row];
+        if ([reportModel.STORE_NM isEqualToString:@"无"]) {
+            
+            [tempCell.company setTitle: reportModel.AGENT_NM forState:UIControlStateNormal];
+        }else
+        {
+            [tempCell.company setTitle:reportModel.STORE_NM forState:UIControlStateNormal];
+        }
+        //    inpdtm =  reportModel.INP_DTM;
+        //    tempCell.date.text = inpdtm;
+        tempCell.date.text = reportModel.INP_DTM;
+        tempCell.rmk.text=reportModel.RMK;
+        tempCell.product.text=reportModel.PRODUCT_NM;
+        tempCell.purpose.text=reportModel.VISIT_PURPOSE;
+        [tempCell.ename setTitle:reportModel.EMP_NM forState:UIControlStateNormal];
+        
+        [tempCell.ename addTarget:self action:@selector(reportUser:) forControlEvents:UIControlEventTouchUpInside];
+        tempCell.ename.tag = indexPath.row ;
+        [tempCell.company addTarget:self action:@selector(reportCoustomer:) forControlEvents:UIControlEventTouchUpInside];
+        tempCell.company.tag = indexPath.row ;
     }
 }
 //-(void) saveNSUserDefaults{
@@ -698,7 +698,7 @@ UITableView *tableView;
 
 -(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-   if (isRefresh) {
+    if (isRefresh) {
         [self.refreshControll endPullDownRefreshing];
     }else
     {
@@ -710,7 +710,7 @@ UITableView *tableView;
         id detailViewController=segue.destinationViewController;
         [detailViewController setValue:self.reportID forKey:@"reportId"];
         [detailViewController setValue:inpdtm forKey:@"inpdtm"];
-       
+        
     }
     if ([segue.identifier isEqualToString:@"searchId"]) {
         SearchViewController *searchController=(SearchViewController *)segue.destinationViewController;
@@ -722,12 +722,12 @@ UITableView *tableView;
         
     }
     if ([segue.identifier isEqualToString:@"ReportCustomerCellId"]) {
-       
+        
         ReportCoustomerViewController *vc  = (ReportCoustomerViewController *)segue.destinationViewController;
         vc.reportcustomer = self.reportcustomer;
         vc.type1 = self.type1;
-            NSLog(@"%@,%@",vc.reportcustomer,vc.type1);
-        }
+        NSLog(@"%@,%@",vc.reportcustomer,vc.type1);
+    }
     
 }
 
@@ -736,24 +736,24 @@ UITableView *tableView;
 -(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-        ReportModel *value=(ReportModel*)[self.reports objectAtIndex:indexPath.row];
-        self.reportID=value.ID;
-        
-        inpdtm = value.INP_DTM;
-        NSLog(@"%@",inpdtm);
-        prouctName = value.PRODUCT_NM;
-        NSLog(@"%@=======123",prouctName);
-        
-        [self performSegueWithIdentifier:@"reportDetailId" sender:self];
-    }
+    ReportModel *value=(ReportModel*)[self.reports objectAtIndex:indexPath.row];
+    self.reportID=value.ID;
+    
+    inpdtm = value.INP_DTM;
+    NSLog(@"%@",inpdtm);
+    prouctName = value.PRODUCT_NM;
+    NSLog(@"%@=======123",prouctName);
+    
+    [self performSegueWithIdentifier:@"reportDetailId" sender:self];
+}
 
 #pragma 刷新控件
 
 - (BOOL)hasRefreshFooterView {
     if (self.reports.count > 0 && self.reports.count < Max_Count) {
-       
+        
         return YES;
-        }
+    }
     return NO;
 }
 
@@ -769,17 +769,17 @@ UITableView *tableView;
     Common *common=[[Common alloc] initWithView:self.view];
     
     if (common.isConnectionAvailable) {
-            //[HUDManager showMessage:@"加载中..."];
+        //[HUDManager showMessage:@"加载中..."];
         isRefresh=YES;
         currentPage=1;
-            //[self setCanBack:NO];
+        //[self setCanBack:NO];
         [self performSelector:@selector(endRefresh) withObject:nil afterDelay:3];
-
+        
     }
 }
 - (void)beginPullUpLoading
 {
-        //[HUDManager showMessage:@"加载中..."];
+    //[HUDManager showMessage:@"加载中..."];
     //[self setCanBack:NO];
     isRefresh=NO;
     [self performSelector:@selector(endLoadMore) withObject:nil afterDelay:3];
@@ -799,12 +799,12 @@ UITableView *tableView;
         }
         else
         {
-        
-//            if ([self.selectArea.DEPT_ID isEqualToString:@"0"]) {
-//                reportParam.IN_AREA_ID=@"";
-//            }else
-//            {
-                reportParam.IN_AREA_ID=self.selectArea.DEPT_ID;
+            
+            //            if ([self.selectArea.DEPT_ID isEqualToString:@"0"]) {
+            //                reportParam.IN_AREA_ID=@"";
+            //            }else
+            //            {
+            reportParam.IN_AREA_ID=self.selectArea.DEPT_ID;
             //}
         }
         if (self.selectDept==nil) {
@@ -844,7 +844,7 @@ UITableView *tableView;
         NSLog(@"%@",paramXml);
         [self.serviceHelper resetQueue];
         
-       request1=[ServiceHelper commonSharedRequestMethod1:@"HMG_DAILY_REPORT_QUERY" soapMessage:paramXml];
+        request1=[ServiceHelper commonSharedRequestMethod1:@"HMG_DAILY_REPORT_QUERY" soapMessage:paramXml];
         [request1 setUserInfo:[NSDictionary dictionaryWithObjectsAndKeys:@"HMG_DAILY_REPORT_QUERY",@"name", nil]];
         
         [self.serviceHelper addRequestQueue:request1];
@@ -867,11 +867,11 @@ UITableView *tableView;
         }
         else
         {
-//            if ([self.selectArea.DEPT_ID isEqualToString:@"0"]) {
-//                reportParam.IN_AREA_ID=@"";
-//            }else
-//            {
-                reportParam.IN_AREA_ID=self.selectArea.DEPT_ID;
+            //            if ([self.selectArea.DEPT_ID isEqualToString:@"0"]) {
+            //                reportParam.IN_AREA_ID=@"";
+            //            }else
+            //            {
+            reportParam.IN_AREA_ID=self.selectArea.DEPT_ID;
             //}
         }
         if (self.selectDept==nil) {
@@ -910,7 +910,7 @@ UITableView *tableView;
         //NSLog(@"%@",paramXml);
         [self.serviceHelper resetQueue];
         
-       request1=[ServiceHelper commonSharedRequestMethod1:@"HMG_DAILY_REPORT_QUERY" soapMessage:paramXml];
+        request1=[ServiceHelper commonSharedRequestMethod1:@"HMG_DAILY_REPORT_QUERY" soapMessage:paramXml];
         [request1 setUserInfo:[NSDictionary dictionaryWithObjectsAndKeys:@"HMG_DAILY_REPORT_QUERY",@"name", nil]];
         
         [self.serviceHelper addRequestQueue:request1];
@@ -947,8 +947,8 @@ UITableView *tableView;
     
     [self.navigationController setNavigationBarHidden:NO];
     
-
-        //[self.refreshControll startPullDownRefreshing];
+    
+    //[self.refreshControll startPullDownRefreshing];
     
 }
 
@@ -1006,7 +1006,7 @@ UITableView *tableView;
     self.startDate=START_DATE;
     self.endDate=END_DATE;
     
-        //[HUDManager showMessage:@"加载中..."];
+    //[HUDManager showMessage:@"加载中..."];
     
 }
 
