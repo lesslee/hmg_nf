@@ -449,9 +449,12 @@ id<ISSContainer> container;
         
         param.IN_COMPANY = @"HMG";
         
-        param.IN_VERSION = @"1.0";
+        NSDictionary *infoDict = [[NSBundle mainBundle]infoDictionary];
+        NSString *Version = [infoDict objectForKey:@"CFBundleShortVersionString"];
         
-        NSLog(@"%@",param.IN_SABEON);
+        param.IN_VERSION = Version;
+        
+        NSLog(@"%@",param.IN_VERSION);
         
         NSString *identifierForVendor = [[UIDevice currentDevice].identifierForVendor UUIDString];
         NSLog(@"%@",identifierForVendor);
