@@ -41,7 +41,9 @@ NSString *empno;
     UIImage *imageBg=[UIImage imageNamed:@"login_bg.png"];
     self.view.layer.contents=(id)imageBg.CGImage;
     self.view.layer.backgroundColor = [UIColor clearColor].CGColor;
-    
+    NSDictionary *infoDict = [[NSBundle mainBundle] infoDictionary];
+    NSString *myVersion = [infoDict objectForKey:@"CFBundleShortVersionString"];
+    self.version.text=[NSString stringWithFormat:@"V %@",myVersion];
     HUDManager = [[MBProgressHUDManager alloc] initWithView:self.navigationController.view];
 }
 
@@ -58,8 +60,8 @@ NSString *empno;
         NSDictionary *infoDict = [[NSBundle mainBundle] infoDictionary];
         NSString *myVersion = [infoDict objectForKey:@"CFBundleShortVersionString"];
         NSLog(@"本地－－－－版本123%@",myVersion);
-        
-        if (![newVersion isEqualToString:myVersion]) {
+
+        if ([newVersion compare:myVersion]==NSOrderedDescending) {
             UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"有新版本" delegate:self cancelButtonTitle:@"立即更新" otherButtonTitles:@"暂不更新", nil];
             [alert show];
         }

@@ -21,6 +21,7 @@
 @property (strong, nonatomic) IBOutlet UITextField *loginId;
 @property (strong, nonatomic) IBOutlet UITextField *password;
 @property (strong, nonatomic) IBOutlet UISwitch *rememberPassword;
+@property (weak, nonatomic) IBOutlet UILabel *version;
 
 
 @end
